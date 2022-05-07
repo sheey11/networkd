@@ -35,7 +35,7 @@ daemon = CampusNetwork('1.2.3.4')
 2. 登陆和登出
 
    ```python
-   daemon.login([username], [password], [service])
+   daemon.login([username], [password], [service]) -> Tuple[bool, str]
    daemon.logout()
    ```
 
@@ -44,6 +44,12 @@ daemon = CampusNetwork('1.2.3.4')
    |`username`|`str`|用户名|
    |`password`|`str`|密码|
    |`service`|`str`|服务类型|
+
+   |返回值|说明|
+   |-|-|-|
+   |`bool`|`是否成功`|
+   |`str`|错误原因|
+
 
 
 ## Attributes

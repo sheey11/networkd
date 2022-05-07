@@ -15,6 +15,7 @@ python3 networkd.py
 from campus import CampusNetwork
 daemon = CampusNetwork()
 
+# 如果当前网络已经认证，那么将无法获取到认证 IP
 # 可以手动指定认证 IP
 daemon = CampusNetwork('1.2.3.4')
 ```

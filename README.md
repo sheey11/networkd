@@ -46,11 +46,9 @@ daemon = CampusNetwork('1.2.3.4')
    |`service`|`str`|服务类型|
 
    |返回值|说明|
-   |-|-|-|
+   |-|-|
    |`bool`|`是否成功`|
    |`str`|错误原因|
-
-
 
 ## Attributes
 

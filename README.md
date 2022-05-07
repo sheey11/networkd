@@ -45,7 +45,10 @@ daemon = CampusNetwork('1.2.3.4')
    |`password`|`str`|密码|
    |`service`|`str`|服务类型|
 
-3. 获取服务
+
+## Attributes
+
+1. 所有服务
 
    ```python
    daemon.service_names
@@ -54,3 +57,21 @@ daemon = CampusNetwork('1.2.3.4')
    |类型|说明|
    |-|-|
    |`List[str]`|服务名|
+
+2. 用户名
+   
+   ```python
+   daemon.user_name: str
+   ```
+   
+3. 当前服务
+   
+   ```python
+   daemon.current_service: str
+   ```
+
+4. 是否登录
+   
+   ```python
+   daemon.logged_in: bool
+   ```

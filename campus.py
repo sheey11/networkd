@@ -6,6 +6,7 @@
 
 import requests, re, time
 from urllib.parse import quote
+import logging
 
 from threading import Thread
 
@@ -44,6 +45,7 @@ class CampusNetwork:
 
     def __init__(self, base_url: str = ''):
         self._sess = requests.Session()
+        self._sess.keep_alive = False
         if base_url != '':
             if base_url.startswith('http://'):
                 self._baseUrl = base_url
@@ -90,7 +92,11 @@ class CampusNetwork:
         self.service_names.sort()
 
     def satisfy_url_and_query_string(self) -> None:
-        res = self._sess.get("http://www.gstatic.com/generate_204", timeout=5)
+        status_code = 0
+        while status_code != 200 and status_code != 204:
+                res = self._sess.get("http://www.gstatic.com/generate_204", timeout=5)
+                logging.debug('gstatic responds with: %d' % res.status_code)
+                status_code = res.status_code
         if res.status_code == 204:
             return
 
@@ -130,7 +136,8 @@ class CampusNetwork:
             self.fetch_status()
             return ret['result'] == 'success', ret['message']
         except Exception as e:
-            return False, e.__str__()
+            logging.exception(e)
+            return False, "exception encontered"
 
     def logout(self) -> bool:
         DATA = "userIndex=%s" % self._online_status["userIndex"]
@@ -149,6 +156,7 @@ class CampusNetwork:
         action, self._monitor_closure_stop = self._get_monitor_actions(interval)
 
         self._monitor_thread = Thread(None, action)
+        self._monitor_thread.setDaemon(True)
         self._monitor_thread.start()
 
     def get_network_access(self) -> str:

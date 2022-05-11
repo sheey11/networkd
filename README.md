@@ -11,6 +11,7 @@ python3 networkd.py
 
 或者用 Docker 跑
 ```sh
+sudo docker build -t networkd .
 sudo docker run -d --restart unless-stopped -v $(pwd)/config.json:/usr/src/app/config.json --name networkd --add-host www.gstatic.com:203.208.40.98 networkd
 ```
 
